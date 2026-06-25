@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ product.name }}</h1>
+    <p><strong>Category:</strong> {{ product.category.name }}</p>
+    <p><strong>Price:</strong> Rs. {{ product.price }}</p>
+    
+    <div style="margin-top: 20px;">
+        <p>{{ product.description }}</p>
+    </div>
+    
+    <button style="margin-top: 20px; padding: 10px; background: black; color: white;">
+        Add to Cart
+    </button>
+{% endblock %}
