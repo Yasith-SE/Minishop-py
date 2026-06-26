@@ -45,3 +45,20 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+    
+
+from django.contrib.auth.models import User
+# ... your existing Category and Product models ...
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    is_seller = models.BooleanField(default=False)
+    
+    # New Seller Fields
+    date_of_birth = models.DateField(null=True, blank=True)
+    phone_number = models.CharField(max_length=20, blank=True)
+    home_address = models.CharField(max_length=255, blank=True)
+    postal_code = models.CharField(max_length=20, blank=True)
+
+    def __str__(self):
+        return self.user.username

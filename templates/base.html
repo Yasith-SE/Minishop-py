@@ -22,15 +22,29 @@
                 <div class="col-md-3">
                     <h3 class="mb-0"><i class="fas fa-store"></i> Minishop</h3>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-5">
                     <div class="input-group">
                         <input type="text" class="form-control search-bar" placeholder="Search in Minishop...">
                     </div>
                 </div>
-                <div class="col-md-3 text-end">
+                <div class="col-md-4 text-end">
                     <a href="#"><i class="fas fa-shopping-cart"></i> Cart</a>
-                    <a href="#"><i class="fas fa-sign-in-alt"></i> Login</a>
-                    <a href="#"><i class="fas fa-user-plus"></i> Sign Up</a>
+                    
+                    {% if user.is_authenticated %}
+                        <span class="ms-3 text-white"><i class="fas fa-user"></i> Hello, {{ user.username }}</span>
+                        
+                        {% if user.userprofile and user.userprofile.is_seller %}
+                            <a href="#" class="ms-3 text-warning"><i class="fas fa-store"></i> Seller Dashboard</a>
+                        {% endif %}
+                        
+                        <form action="{% url 'core:logout' %}" method="post" class="d-inline ms-3">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-outline-light"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                        </form>
+                    {% else %}
+                        <a href="{% url 'core:login' %}" class="ms-3"><i class="fas fa-sign-in-alt"></i> Login</a>
+                        <a href="{% url 'core:signup' %}" class="ms-3"><i class="fas fa-user-plus"></i> Sign Up</a>
+                    {% endif %}
                 </div>
             </div>
             <div class="row mt-3">
